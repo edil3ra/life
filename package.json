@@ -1,0 +1,34 @@
+{
+  "name": "brunch-app",
+  "description": "Brunch.io application",
+  "private": true,
+  "author": "Brunch",
+  "version": "0.0.1",
+  "repository": "",
+  "scripts": {
+    "start": "brunch watch --server",
+    "build": "brunch build --production"
+  },
+  "dependencies": {
+    "react": "^15.5.4",
+    "react-dom": "^15.4",
+    "react-redux": "^5.0.5",
+    "redux": "^3.6.0"
+  },
+  "devDependencies": {
+    "@types/react": "^15.0.24",
+    "@types/react-dom": "^15.5.0",
+    "@types/react-redux": "^4.4.40",
+    "@types/redux": "^3.6.0",
+    "auto-reload-brunch": "^2",
+    "babel-brunch": "~6.0",
+    "babel-preset-latest": "^6",
+    "babel-preset-react": "~6.22",
+    "brunch": "^2",
+    "clean-css-brunch": "^2",
+    "hmr-brunch": "^0.1.1",
+    "tslint-react-recommended": "^1.0.5",
+    "typescript-brunch": "^2.3.0",
+    "uglify-js-brunch": "^2"
+  }
+}
