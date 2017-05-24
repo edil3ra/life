@@ -1,14 +1,22 @@
-import * as React from 'react';
+import * as React from 'react'
+import { Board } from './Board'
+
 
 export class App extends React.Component<any, any> {
   constructor() {
-	super()
+    super()
   }
-  
+
   render() {
+    const appStyle = {
+      margin: `0px`,
+      padding: `0px`,
+    };
+
+
     return (
-      <div id="content">
-		hello 
+      <div style={appStyle}>
+        <Board />
       </div>
     );
   }
