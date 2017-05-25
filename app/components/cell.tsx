@@ -1,17 +1,17 @@
 import * as React from 'react'
 
-export interface ICellProps {
-  width: number
-  height: number
-  left: number
-  top: number
-  life: boolean
+export type TCellProps = {
+  width: number,
+  height: number,
+  left: number,
+  top: number,
+  life: boolean,
 }
 
 
 
-export class Cell extends React.Component<ICellProps, any> {
-  constructor(props: ICellProps) {
+export class CellComponent extends React.Component<TCellProps, any> {
+  constructor(props: TCellProps) {
     super(props)
   }
   

@@ -1,14 +1,14 @@
 import * as React from 'react'
-import { Cell, ICellProps } from './Cell'
+import { CellComponent, TCellProps } from './cell'
 import { WIN_X, WIN_Y, CELL_COUNT } from '../config'
 
 
 export interface BoardState {
-  cells: Array<ICellProps>
+  cells: Array<TCellProps>
 }
 
 
-export class Board extends React.Component<any, BoardState> {
+export class BoardComponent extends React.Component<any, BoardState> {
   protected pausedInterval: number
 
   constructor() {
@@ -18,16 +18,16 @@ export class Board extends React.Component<any, BoardState> {
     }
   }
 
-  protected createCells(): Array<ICellProps> {
+  protected createCells(): Array<TCellProps> {
     const sizeX: number = Math.sqrt(WIN_X * WIN_Y / CELL_COUNT)
     const sizeY: number = Math.sqrt(WIN_X * WIN_Y / CELL_COUNT)
     const countX: number = Math.sqrt(CELL_COUNT)
     const countY: number = Math.sqrt(CELL_COUNT)
-    const cells = new Array<ICellProps>()
+    const cells = new Array<TCellProps>()
 
     // create the cells
     for (let i = 0; i < CELL_COUNT; i++) {
-      const cellProps: ICellProps = {
+      const cellProps: TCellProps = {
         width: sizeX,
         height: sizeY,
         left: (i % countX) * sizeX,
@@ -49,7 +49,7 @@ export class Board extends React.Component<any, BoardState> {
     clearInterval(this.pausedInterval)
   }
 
-  protected cellsLife(cells: Array<ICellProps>): Array<boolean> {
+  protected cellsLife(cells: Array<TCellProps>): Array<boolean> {
     return cells.map((cell) => cell.life)
   }
 
@@ -86,8 +86,8 @@ export class Board extends React.Component<any, BoardState> {
     return lifesCounts
   }
 
-  protected updateCells(cells: Array<ICellProps>, life: Array<boolean>): Array<ICellProps> {
-    let cellsUpdated: Array<ICellProps> = new Array()
+  protected updateCells(cells: Array<TCellProps>, life: Array<boolean>): Array<TCellProps> {
+    let cellsUpdated: Array<TCellProps> = new Array()
     for (let i = 0; i < cells.length; i++) {
       cellsUpdated.push({
 		...cells[i], life: life[i]
@@ -98,7 +98,7 @@ export class Board extends React.Component<any, BoardState> {
 
 
 
-  protected simulate(cells: Array<ICellProps>): Array<ICellProps>{
+  protected simulate(cells: Array<TCellProps>): Array<TCellProps>{
     const lifes = this.cellsLife(cells)
     const counts = this.cellsCount(lifes)
     const countsLife = this.cellsCountLife(lifes, counts)

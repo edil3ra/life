@@ -1,8 +1,8 @@
 import * as React from 'react'
-import { Board } from './Board'
+import { BoardComponent } from './board'
 
 
-export class App extends React.Component<any, any> {
+export class AppComponent extends React.Component<any, any> {
   constructor() {
     super()
   }
@@ -16,7 +16,7 @@ export class App extends React.Component<any, any> {
 
     return (
       <div style={appStyle}>
-        <Board />
+        <BoardComponent />
       </div>
     );
   }

@@ -1,6 +1,6 @@
 import * as ReactDOM from 'react-dom'
 import * as React from 'react'
-import { App } from './components/App'
+import { AppComponent } from './components/app'
 
 
 if (module.hot) {
@@ -9,7 +9,7 @@ if (module.hot) {
 
 const load = () => {
   ReactDOM.render(
-    <App />,
+    <AppComponent />,
     document.querySelector('#app')
   );
 };
