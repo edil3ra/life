@@ -21,16 +21,16 @@ export class Cell extends React.Component<ICellProps, any> {
 
 	
     const cellStyle = {
-	  position: 'absolute',
-	  width: `${width}px`,
-	  height: `${height}px`,
+	  position: 'absolute' as 'absolute',
+	  width: `${width - 1}px`,
+	  height: `${height - 1}px`,
 	  left: `${left}px`,
 	  top: `${top}px`,
       backgroundColor: life ? `green` : `red`,
     };
 
 	
-	
+
     return (
 		<li style={cellStyle}></li>
     )
