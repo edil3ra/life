@@ -126,7 +126,7 @@ export class BoardComponent extends React.Component<any, BoardState> {
 		}
 	  }
 	})
-	return this.updateCells(lifes, lifesSimulate)
+	return this.updateCells(cells, lifesSimulate)
   }
 
 
@@ -161,7 +161,7 @@ export class BoardComponent extends React.Component<any, BoardState> {
 
     const cells = this.state.cells.map((cell, i) => {
       return (
-        <Cell {...cell} key={i} />
+        <CellComponent {...cell} key={i} />
       )
     })
 
