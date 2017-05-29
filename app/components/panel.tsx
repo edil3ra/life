@@ -8,8 +8,12 @@ type Styles = {
   restart: Object,
   startPause: Object,
   count: Object,
-  black: Object,
-  hover: Object,
+  red: Object,
+  green: Object,
+  blue: Object,
+  redHover: Object,
+  greenHover: Object,
+  blueHover: Object,
 }
 
 
@@ -35,18 +39,21 @@ type TPanelProps = {
 export class PanelComponent extends React.Component<TPanelProps, TPanelState> {
   protected styles: Styles
 
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.styles = this.initStyles()
-
+    console.log(props.started)
+    const startButtonColor = props.started ? this.styles.red : this.styles.green
     this.state = {
       styles: {
-        restart: [this.styles.button, this.styles.restart],
-        startPause: [this.styles.button, this.styles.startPause],
+        restart: [this.styles.button, this.styles.blue, this.styles.restart],
+        startPause: [this.styles.button, startButtonColor, this.styles.startPause],
         count: [this.styles.button, this.styles.count],
       }
     }
   }
+
+
 
 
   protected initStyles(): Styles {
@@ -66,9 +73,7 @@ export class PanelComponent extends React.Component<TPanelProps, TPanelState> {
         'padding': '10px',
         'cursor': 'pointer',
         'fontSize': '1em',
-        'color': '#fff',
-        'backgroundColor': '#6496c8',
-        'textShadow': '-1px 1px #417cb8',
+        'color': '#ffffff',
         'border': 'none'
 
       },
@@ -82,17 +87,34 @@ export class PanelComponent extends React.Component<TPanelProps, TPanelState> {
         'padding': '0px',
         'marginLeft': '10px',
       },
+
       red: {
-        'color': '#fff',
-        'background': '#000',
+        'color': '#ffffff',
+        'backgroundColor': '#480000',
       },
+
       green: {
-        'color': '#fff',
-        'background': '#000',
+        'color': '#ffffff',
+        'backgroundColor': '#00C717',
+        'textShadow': '-1px 1px #002E00',
       },
-      hover: {
-        'backgroundColor': '#346392',
-        'textShadow': '-1px 1px #27496d'
+
+      blue: {
+        'color': '#ffffff',
+        'backgroundColor': '#1B00C7',
+        'textShadow': '-1px 1px #000061',
+      },
+
+      redHover: {
+        'backgroundColor': '#940000',
+      },
+
+      greenHover: {
+        'backgroundColor': '#009400',
+      },
+
+      blueHover: {
+        'backgroundColor': '#000094',
       }
     }
     return styles
@@ -112,9 +134,18 @@ export class PanelComponent extends React.Component<TPanelProps, TPanelState> {
 
   protected removeStyle(key: string): void {
     const cloned = { ...this.state }
-    cloned["styles"][key].pop()
+    cloned['styles'][key].pop()
     this.setState(cloned)
   }
+
+  protected changeStartPauseStyle(event: any): void {
+	event.preventDefault()
+	const cloned = { ...this.state }
+	cloned['styles']['startPause'][1] = this.props.started ?
+	  this.styles.green : this.styles.red
+	this.setState(cloned)
+  }
+  
 
   render() {
     const {
@@ -131,16 +162,22 @@ export class PanelComponent extends React.Component<TPanelProps, TPanelState> {
       <div style={this.styles.panel}>
         <form>
           <button style={this.displayStyle(this.state.styles.restart)}
-            onMouseEnter={(_ => this.appendStyle('restart', this.styles.hover))}
+            onMouseEnter={(_ => this.appendStyle('restart', this.styles.blueHover))}
             onMouseLeave={(_ => this.removeStyle('restart'))}
             onClick={handleRestart}
           >
             Restart
           </button>
           <button style={this.displayStyle(this.state.styles.startPause)}
-            onMouseEnter={(_ => this.appendStyle('startPause', this.styles.hover))}
+            onMouseEnter={(_ => started ?
+              this.appendStyle('startPause', this.styles.redHover) :
+              this.appendStyle('startPause', this.styles.greenHover)
+            )}
             onMouseLeave={(_ => this.removeStyle('startPause'))}
-            onClick={handleStartPause}>
+            onClick={(e) => {
+              handleStartPause(e)
+			  this.changeStartPauseStyle(e)
+            }}>
             {started ? "Paused" : "Start"}
           </button>
           <input
