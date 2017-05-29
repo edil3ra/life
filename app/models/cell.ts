@@ -77,3 +77,36 @@ export function updateCells(cells: Array<TCellProps>, life: Array<boolean>): Arr
   }
   return cellsUpdated
 }
+
+
+
+export function simulate(cells: Array<TCellProps>): Array<TCellProps> {
+  const lifes = cellsLife(cells)
+  const counts = cellsCount(lifes)
+  const countsLife = cellsCountLife(lifes, counts)
+  const lifesSimulate = lifes.slice()
+
+
+  countsLife.forEach(({ life, count }, index) => {
+    if (life) {
+      if (count <= 1) {
+        lifesSimulate[index] = false
+      }
+      else if (count >= 4) {
+        lifesSimulate[index] = false
+      }
+      else {
+        lifesSimulate[index] = true
+      }
+    } else {
+      if (count == 3) {
+        lifesSimulate[index] = true
+      }
+      else {
+        lifesSimulate[index] = false
+      }
+    }
+  })
+  return updateCells(cells, lifesSimulate)
+}
+

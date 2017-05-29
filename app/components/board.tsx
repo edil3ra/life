@@ -1,17 +1,15 @@
 import * as React from 'react'
-import { TCellProps, createCells, cellsCount, cellsCountLife, cellsLife, updateCells} from '../models/cell'
 import { CellComponent } from './cell'
-import { WIN_X, WIN_Y, CELL_COUNT } from '../config'
 
 
 export interface BoardProps {
-  cells: Array<TCellProps>
+  cells: Array<TCellProps>,
+  width: number,
+  height: number
 }
 
 
 export class BoardComponent extends React.Component<BoardProps, any> {
-  protected pausedInterval: number
-
   constructor() {
     super()
   }
@@ -20,8 +18,8 @@ export class BoardComponent extends React.Component<BoardProps, any> {
     const boardStyle = {
       position: 'relative' as 'relative',
       margin: 'auto',
-      width: `${WIN_X}.px`,
-      height: `${WIN_Y}.px`,
+      width: `${this.props.width}.px`,
+      height: `${this.props.height}.px`,
       backgroundColor: `#efefef`,
     };
 
