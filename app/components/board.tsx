@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { CellComponent } from './cell'
-
+import { TCellProps } from '../models/cell'
 
 export interface BoardProps {
   cells: Array<TCellProps>,

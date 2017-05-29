@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { BoardComponent } from './board'
+import { PanelComponent } from './panel'
 import { TCellProps, createCells, cellsCount, cellsCountLife, cellsLife, updateCells, simulate } from '../models/cell'
 import { WIN_X, WIN_Y, CELL_COUNT } from '../config'
 
@@ -55,6 +56,8 @@ export class AppComponent extends React.Component<any, AppState> {
           width={WIN_X}
           height={WIN_Y}
         />
+		
+		<PanelComponent />
       </div>
     );
   }
