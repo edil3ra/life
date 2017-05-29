@@ -3,7 +3,6 @@ import { TCellProps } from '../models/cell'
 
 
 
-
 export class CellComponent extends React.Component<TCellProps, any> {
   constructor(props: TCellProps) {
     super(props)
@@ -11,7 +10,6 @@ export class CellComponent extends React.Component<TCellProps, any> {
   
   render() {
 	const {width, height, left, top, life} = this.props
-
 	
     const cellStyle = {
 	  position: 'absolute' as 'absolute',

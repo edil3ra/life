@@ -13,16 +13,16 @@ type Styles = {
 }
 
 
-type PanelState = {
+type TPanelState = {
   styles: {
-	restart: Array<Styles>
-	startPause: Array<Styles>
-	count: Array<Styles>
+    restart: Array<Styles>
+    startPause: Array<Styles>
+    count: Array<Styles>
   }
 }
 
 
-type PanelProps = {
+type TPanelProps = {
   started: Boolean,
   countMin: number,
   countMax: number,
@@ -32,7 +32,7 @@ type PanelProps = {
   handleCount: (event: EventListener) => void
 }
 
-export class PanelComponent extends React.Component<any, PanelState> {
+export class PanelComponent extends React.Component<TPanelProps, TPanelState> {
   protected styles: Styles
 
   constructor() {
@@ -66,11 +66,11 @@ export class PanelComponent extends React.Component<any, PanelState> {
         'padding': '10px',
         'cursor': 'pointer',
         'fontSize': '1em',
-		'color': '#fff',
-		'background-color': '#6496c8',
-		'text-shadow': '-1px 1px #417cb8',
-		'border': 'none'
-		
+        'color': '#fff',
+        'backgroundColor': '#6496c8',
+        'textShadow': '-1px 1px #417cb8',
+        'border': 'none'
+
       },
       restart: {
 
@@ -82,14 +82,18 @@ export class PanelComponent extends React.Component<any, PanelState> {
         'padding': '0px',
         'marginLeft': '10px',
       },
-      black: {
+      red: {
         'color': '#fff',
         'background': '#000',
       },
-	  hover: {
-		'background-color': '#346392',
-		'text-shadow': '-1px 1px #27496d'
-	  }
+      green: {
+        'color': '#fff',
+        'background': '#000',
+      },
+      hover: {
+        'backgroundColor': '#346392',
+        'textShadow': '-1px 1px #27496d'
+      }
     }
     return styles
   }
@@ -113,26 +117,40 @@ export class PanelComponent extends React.Component<any, PanelState> {
   }
 
   render() {
+    const {
+	  started,
+      countMin,
+      countMax,
+      countCurrent,
+      handleRestart,
+      handleStartPause,
+      handleCount
+	} = this.props
+
     return (
       <div style={this.styles.panel}>
         <form>
           <button style={this.displayStyle(this.state.styles.restart)}
             onMouseEnter={(_ => this.appendStyle('restart', this.styles.hover))}
-            onMouseLeave={(_ => this.removeStyle('restart'))}>
+            onMouseLeave={(_ => this.removeStyle('restart'))}
+            onClick={handleRestart}
+          >
             Restart
           </button>
           <button style={this.displayStyle(this.state.styles.startPause)}
             onMouseEnter={(_ => this.appendStyle('startPause', this.styles.hover))}
-            onMouseLeave={(_ => this.removeStyle('startPause'))}>
-            start
+            onMouseLeave={(_ => this.removeStyle('startPause'))}
+            onClick={handleStartPause}>
+            {started ? "Paused" : "Start"}
           </button>
           <input
             style={{ ...this.styles.button, ...this.styles.count }}
             type="range"
-            min={CELL_MIN_SCALE}
-            max={CELL_MAX_SCALE}
-            value={1}
-            step={1} />
+            min={countMin}
+            max={countMax}
+            value={countCurrent}
+            step={1}
+            onChange={handleCount} />
         </form>
       </div >
     )

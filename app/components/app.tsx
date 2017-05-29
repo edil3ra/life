@@ -2,7 +2,7 @@ import * as React from 'react'
 import { BoardComponent } from './board'
 import { PanelComponent } from './panel'
 import { TCellProps, createCells, cellsCount, cellsCountLife, cellsLife, updateCells, simulate } from '../models/cell'
-import { WIN_X, WIN_Y, CELL_COUNT } from '../config'
+import { WIN_X, WIN_Y, CELL_COUNT, CELL_MIN_SCALE, CELL_MAX_SCALE } from '../config'
 
 
 export interface AppState {
@@ -28,6 +28,7 @@ export class AppComponent extends React.Component<any, AppState> {
 
   protected pause(): any {
     clearInterval(this.pausedInterval)
+	this.pausedInterval = 0
   }
 
 
@@ -42,22 +43,54 @@ export class AppComponent extends React.Component<any, AppState> {
   }
 
 
+  handleRestart(event: any): void {
+	event.preventDefault()
+	this.setState({
+	  ...this.state,
+	  cells: createCells(WIN_X, WIN_Y, Math.floor(this.state.cells.length))
+	})
+  }
+
+  handleStartPause(event: any): void {
+	event.preventDefault()
+	this.pausedInterval == 0 ? this.start() : this.pause()
+	this.forceUpdate()
+  }
+
+  handleCount(event: any): void {
+	event.preventDefault()
+	this.setState({
+	  ...this.state,
+	  cells: createCells(WIN_X, WIN_Y, Math.pow(event.target.value, 2))
+	})
+  }
+  
   render() {
     const appStyle = {
       margin: `0px`,
       padding: `0px`,
-    };
+    }
 
-
+	const boardProps = {
+	  cells: this.state.cells,
+      width: WIN_X,
+      height: WIN_Y,
+	}
+	
+	const panelProps = {
+	  started: this.pausedInterval > 0 ? true : false ,
+	  countMin: CELL_MIN_SCALE,
+	  countMax: CELL_MAX_SCALE,
+	  countCurrent: Math.floor(Math.pow(this.state.cells.length, 0.5)) ,
+	  handleRestart: this.handleRestart.bind(this),
+	  handleStartPause: this.handleStartPause.bind(this),
+	  handleCount: this.handleCount.bind(this),
+	}
+	
     return (
       <div style={appStyle}>
-        <BoardComponent
-          cells={this.state.cells}
-          width={WIN_X}
-          height={WIN_Y}
-        />
-		
-		<PanelComponent />
+        <BoardComponent {...boardProps} />
+		<PanelComponent {...panelProps}/>
       </div>
     );
   }

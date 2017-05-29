@@ -2,14 +2,14 @@ import * as React from 'react'
 import { CellComponent } from './cell'
 import { TCellProps } from '../models/cell'
 
-export interface BoardProps {
+export type TBoardProps = {
   cells: Array<TCellProps>,
   width: number,
   height: number
 }
 
 
-export class BoardComponent extends React.Component<BoardProps, any> {
+export class BoardComponent extends React.Component<TBoardProps, any> {
   constructor() {
     super()
   }
