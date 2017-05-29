@@ -1,12 +1,6 @@
 import * as React from 'react'
+import { TCellProps } from '../models/cell'
 
-export type TCellProps = {
-  width: number,
-  height: number,
-  left: number,
-  top: number,
-  life: boolean,
-}
 
 
 
@@ -17,7 +11,6 @@ export class CellComponent extends React.Component<TCellProps, any> {
   
   render() {
 	const {width, height, left, top, life} = this.props
-	
 
 	
     const cellStyle = {
