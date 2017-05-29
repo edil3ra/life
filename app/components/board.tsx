@@ -4,77 +4,16 @@ import { CellComponent } from './cell'
 import { WIN_X, WIN_Y, CELL_COUNT } from '../config'
 
 
-export interface BoardState {
+export interface BoardProps {
   cells: Array<TCellProps>
 }
 
 
-export class BoardComponent extends React.Component<any, BoardState> {
+export class BoardComponent extends React.Component<BoardProps, any> {
   protected pausedInterval: number
 
   constructor() {
     super()
-    this.state = {
-      cells: createCells(WIN_X, WIN_Y, CELL_COUNT)
-    }
-  }
-
-
-  protected start(): any {
-    this.pausedInterval = setInterval(() => {
-      this.update()
-    }, 1000)
-  }
-
-  protected pause(): any {
-    clearInterval(this.pausedInterval)
-  }
-
-
-
-  protected simulate(cells: Array<TCellProps>): Array<TCellProps>{
-    const lifes = cellsLife(cells)
-    const counts = cellsCount(lifes)
-    const countsLife = cellsCountLife(lifes, counts)
-	const lifesSimulate = lifes.slice()
-
-
-	
-	countsLife.forEach(({life, count}, index) => {
-	  if(life) {
-		if(count <= 1) {
-		  lifesSimulate[index] = false
-		}
-		else if(count >= 4) {
-		  lifesSimulate[index] = false
-		}
-		else {
-		  lifesSimulate[index] = true
-		}
-	  } else {
-		if(count == 3) {
-		  lifesSimulate[index] = true
-		}
-		else {
-		  lifesSimulate[index] = false
-		}
-	  }
-	})
-	return updateCells(cells, lifesSimulate)
-  }
-
-
-
-  protected update() {
-	const cells = this.simulate(this.state.cells)
-	this.setState({cells: cells})
-  }
-
-
-
-
-  componentWillMount() {
-    this.start()
   }
 
   render() {
@@ -93,7 +32,7 @@ export class BoardComponent extends React.Component<any, BoardState> {
     };
 
 
-    const cells = this.state.cells.map((cell, i) => {
+    const cells = this.props.cells.map((cell, i) => {
       return (
         <CellComponent {...cell} key={i} />
       )
