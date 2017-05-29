@@ -19,7 +19,6 @@ export class CellComponent extends React.Component<TCellProps, any> {
 	  top: `${top}px`,
       backgroundColor: life ? `green` : `red`,
     };
-
 	
 
     return (

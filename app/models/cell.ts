@@ -4,8 +4,9 @@ export type TCellProps = {
   left: number,
   top: number,
   life: boolean,
+  colorAlive: string,
+  colorDeath: string,
 }
-
 
 
 export function createCells(width, height, count): Array<TCellProps> {

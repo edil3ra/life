@@ -455,6 +455,8 @@ exports.CELL_MIN_SCALE = 1;
 exports.CELL_MAX_SCALE = 100;
 exports.CELL_SCALE = 50;
 exports.CELL_COUNT = Math.pow(exports.CELL_SCALE, 2);
+exports.CELL_COLOR_DEATH = '#00ff00';
+exports.CELL_COLOR_ALIVE = '#ff0000';
 //# sourceMappingURL=config.js.map
 
 });
