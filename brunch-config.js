@@ -1,16 +1,22 @@
-exports.files = {
-  javascripts: {
-    joinTo: {
-      'vendor.js': /^(?!app)/,
-      'app.js': /^app/
-    }
+module.exports = {
+  files: {
+	javascripts: {
+	  joinTo: {
+		'vendor.js': /^(?!app)/,
+		'app.js': /^app/,
+	  }	  
+	},
+	stylesheets: {
+	  joinTo: {
+		'vendor.css': /^(?!app)/,
+		'app.css': /^app/,
+	  },
+	},
   },
-  stylesheets: {joinTo: 'app.css'}
-};
-
-exports.plugins = {
-  babel: {presets: ['latest', 'react']}
-};
-
-
-exports.hot = true
+  hot: true,
+  npm: {
+	styles: {
+	  'font-awesome': ['css/font-awesome.css']
+	}
+  }
+}

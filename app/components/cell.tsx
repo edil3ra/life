@@ -9,7 +9,7 @@ export class CellComponent extends React.Component<TCellProps, any> {
   }
   
   render() {
-	const {width, height, left, top, life} = this.props
+	const {width, height, left, top, life, colorAlive, colorDeath} = this.props
 	
     const cellStyle = {
 	  position: 'absolute' as 'absolute',
@@ -17,7 +17,7 @@ export class CellComponent extends React.Component<TCellProps, any> {
 	  height: `${height - 1}px`,
 	  left: `${left}px`,
 	  top: `${top}px`,
-      backgroundColor: life ? `green` : `red`,
+      backgroundColor: life ? colorDeath : colorAlive,
     };
 	
 

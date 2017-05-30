@@ -1,3 +1,5 @@
+import {CELL_COLOR_ALIVE, CELL_COLOR_DEATH} from '../config'
+
 export type TCellProps = {
   width: number,
   height: number,
@@ -24,6 +26,8 @@ export function createCells(width, height, count): Array<TCellProps> {
       left: (i % countX) * sizeX,
       top: (Math.floor(i / countY)) * sizeY,
       life: Math.random() <= 0.5 ? false : true,
+	  colorAlive: CELL_COLOR_ALIVE,
+	  colorDeath: CELL_COLOR_DEATH,
     }
     cells.push(cellProps)
   }
