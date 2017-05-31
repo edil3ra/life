@@ -1,15 +1,16 @@
 import * as React from 'react'
 import { BoardComponent } from './board'
-import { PanelComponent, TPanelProps } from './panel'
+import { PanelComponent } from './panel'
 import { GliderComponent } from './glider'
 import { HistoryComponent } from './history'
 import { OptionComponent } from './option'
-import { TCellProps, createCells, cellsCount, cellsCountLife, cellsLife, updateCells, simulate } from '../models/cell'
+import { ICellProps, createCells, cellsCount, cellsCountLife, cellsLife, updateCells, simulate } from '../models/cell'
+import { IPanelProps, IPanelState } from '../models/panel'
 import { WIN_X, WIN_Y, CELL_COUNT, CELL_MIN_SCALE, CELL_MAX_SCALE } from '../config'
 
 
 export interface AppState {
-  cells: Array<TCellProps>,
+  cells: Array<ICellProps>,
   isGlider: boolean,
   isHistory: boolean,
   isOption: boolean,
@@ -110,7 +111,7 @@ export class AppComponent extends React.Component<any, AppState> {
       height: WIN_Y,
     }
 
-    const panelProps: TPanelProps = {
+    const panelProps: IPanelProps = {
       started: this.pausedInterval > 0 ? true : false,
       handleStart: this.handleStart.bind(this),
 	  handleOption: this.handleOption.bind(this),

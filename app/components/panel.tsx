@@ -1,13 +1,13 @@
 import * as React from 'react'
 import { CELL_MIN_SCALE, CELL_MAX_SCALE } from '../config'
-import { TPanelProps, TPanelState} from '../models/panel'
+import { IPanelProps, IPanelState} from '../models/panel'
 import { TStyle, styles } from '../utils'
 
 
 
-export class PanelComponent extends React.Component<TPanelProps, TPanelState> {
-  public state: TPanelState
-  public props: TPanelProps
+export class PanelComponent extends React.Component<IPanelProps, IPanelState> {
+  public state: IPanelState
+  public props: IPanelProps
   constructor(props) {
     super(props)
     const startButtonColor = props.started ? styles.red : styles.green

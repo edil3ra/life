@@ -1,15 +1,11 @@
 import * as React from 'react'
 import { CellComponent } from './cell'
-import { TCellProps } from '../models/cell'
-
-export type TBoardProps = {
-  cells: Array<TCellProps>,
-  width: number,
-  height: number
-}
+import { ICellProps } from '../models/cell'
+import { IBoardProps } from '../models/board'
 
 
-export class BoardComponent extends React.Component<TBoardProps, any> {
+
+export class BoardComponent extends React.Component<IBoardProps, any> {
   constructor() {
     super()
   }

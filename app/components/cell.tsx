@@ -1,10 +1,10 @@
 import * as React from 'react'
-import { TCellProps } from '../models/cell'
+import { ICellProps } from '../models/cell'
 
 
 
 export class CellComponent extends React.Component<TCellProps, any> {
-  constructor(props: TCellProps) {
+  constructor(props: ICellProps) {
     super(props)
   }
   

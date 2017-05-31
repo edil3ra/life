@@ -1,7 +1,7 @@
 import { TStyle } from '../utils'
 import * as React from 'react'
 
-export type TPanelState = {
+export interface IPanelState {
   styles: {
     restart: Array<Object>
     startPause: Array<Object>
@@ -10,7 +10,7 @@ export type TPanelState = {
 }
 
 
-export type TPanelProps = {
+export interface IPanelProps {
   started: boolean,
   handleStart: (event: any) => void
   handleOption: (event: any) => void

@@ -1,26 +1,26 @@
 import { CELL_COLOR_ALIVE, CELL_COLOR_DEATH } from '../config'
 
-export type TCellProps = {
-  width: number,
-  height: number,
-  left: number,
-  top: number,
-  life: boolean,
-  colorAlive: string,
-  colorDeath: string,
+export interface ICellProps {
+  width: number
+  height: number
+  left: number
+  top: number
+  life: boolean
+  colorAlive: string
+  colorDeath: string
 }
 
 
-export function createCells(width, height, count): Array<TCellProps> {
+export function createCells(width, height, count): Array<ICellProps> {
   const sizeX: number = Math.sqrt(width * height / count)
   const sizeY: number = Math.sqrt(width * height / count)
   const countX: number = Math.sqrt(count)
   const countY: number = Math.sqrt(count)
-  const cells = new Array<TCellProps>()
+  const cells = new Array<ICellProps>()
 
   // create the cells
   for (let i = 0; i < count; i++) {
-    const cellProps: TCellProps = {
+    const cellProps: ICellProps = {
       width: sizeX,
       height: sizeY,
       left: (i % countX) * sizeX,
@@ -35,7 +35,7 @@ export function createCells(width, height, count): Array<TCellProps> {
 }
 
 
-export function cellsLife(cells: Array<TCellProps>): Array<boolean> {
+export function cellsLife(cells: Array<ICellProps>): Array<boolean> {
   return cells.map((cell) => cell.life)
 }
 
@@ -73,8 +73,8 @@ export function cellsCountLife(cells: Array<boolean>, counts: Array<number>): Ar
 }
 
 
-export function updateCells(cells: Array<TCellProps>, life: Array<boolean>): Array<TCellProps> {
-  let cellsUpdated: Array<TCellProps> = new Array()
+export function updateCells(cells: Array<ICellProps>, life: Array<boolean>): Array<ICellProps> {
+  let cellsUpdated: Array<ICellProps> = new Array()
   for (let i = 0; i < cells.length; i++) {
     cellsUpdated.push({
       ...cells[i], life: life[i]
@@ -85,7 +85,7 @@ export function updateCells(cells: Array<TCellProps>, life: Array<boolean>): Arr
 
 
 
-export function simulate(cells: Array<TCellProps>): Array<TCellProps> {
+export function simulate(cells: Array<ICellProps>): Array<ICellProps> {
   const lifes = cellsLife(cells)
   const counts = cellsCount(lifes)
   const countsLife = cellsCountLife(lifes, counts)
