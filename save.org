@@ -1,0 +1,10 @@
+#+BEGIN_SRC javascript
+  <input
+style={{ ...this.styles.button, ...this.styles.count }}
+type="range"
+min={countMin}
+max={countMax}
+value={countCurrent}
+step={1}
+onChange={handleCount} />
+#+END_SRC
