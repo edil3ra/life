@@ -1,4 +1,5 @@
-import { CELL_COLOR_ALIVE, CELL_COLOR_DEATH } from '../config'
+import { CELL_COLOR_ALIVE, CELL_COLOR_DEATH } from 'config'
+
 
 export interface ICellProps {
   width: number

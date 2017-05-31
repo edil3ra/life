@@ -1,7 +1,7 @@
 import * as React from 'react'
-import { CELL_MIN_SCALE, CELL_MAX_SCALE } from '../config'
-import { IPanelProps, IPanelState} from '../models/panel'
-import { TStyle, styles } from '../utils'
+import { CELL_MIN_SCALE, CELL_MAX_SCALE } from 'config'
+import { IPanelProps, IPanelState} from 'models/panel'
+import * as styles from 'styles'
 
 
 
@@ -13,18 +13,9 @@ export class PanelComponent extends React.Component<IPanelProps, IPanelState> {
     const startButtonColor = props.started ? styles.red : styles.green
     this.state = {
       styles: {
-        restart: [styles.button, styles.blue, styles.restart],
-        startPause: [styles.button, startButtonColor, styles.startPause],
-        count: [styles.button, styles.count],
+        start: [styles.button, styles.blue, styles.restart],
       }
     }
-  }
-
-
-  protected displayStyle(style: Array<Object>): Object {
-    return style.reduce((previous, current) => {
-      return { ...previous, ...current }
-    }, {})
   }
 
   protected appendStyle(key: string, item: Object): void {
@@ -42,7 +33,7 @@ export class PanelComponent extends React.Component<IPanelProps, IPanelState> {
   protected changeStartPauseStyle(event: any): void {
     event.preventDefault()
     const cloned = { ...this.state }
-    cloned['styles']['startPause'][1] = this.props.started ?
+    cloned['styles']['start'][1] = this.props.started ?
       styles.green : styles.red
     this.setState(cloned)
   }
@@ -57,7 +48,7 @@ export class PanelComponent extends React.Component<IPanelProps, IPanelState> {
     return (
       <div style={styles.panel}>
         <form>
-          <button style={this.displayStyle(this.state.styles.startPause)}
+          <button style={styles.display(this.state.styles.start)}
             onMouseEnter={(_ => started ?
               this.appendStyle('startPause', styles.redHover) :
               this.appendStyle('startPause', styles.greenHover)

@@ -6,8 +6,10 @@ import { IBoardProps } from '../models/board'
 
 
 export class BoardComponent extends React.Component<IBoardProps, any> {
-  constructor() {
-    super()
+  public props: IBoardProps
+  constructor(props) {
+    super(props)
+	
   }
 
   render() {

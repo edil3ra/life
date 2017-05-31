@@ -6,6 +6,8 @@ import { HistoryComponent } from './history'
 import { OptionComponent } from './option'
 import { ICellProps, createCells, cellsCount, cellsCountLife, cellsLife, updateCells, simulate } from '../models/cell'
 import { IPanelProps, IPanelState } from '../models/panel'
+
+
 import { WIN_X, WIN_Y, CELL_COUNT, CELL_MIN_SCALE, CELL_MAX_SCALE } from '../config'
 
 
@@ -72,17 +74,17 @@ export class AppComponent extends React.Component<any, AppState> {
 
   handleOption(event: any): void {
     event.preventDefault()
-    this.setState({...this.state, option: !this.state.isOption  })
+    this.setState({ ...this.state, option: !this.state.isOption })
   }
-  
+
   handleGlider(event: any): void {
     event.preventDefault()
-    this.setState({...this.state, glider: !this.state.isGlider })
+    this.setState({ ...this.state, glider: !this.state.isGlider })
   }
 
   handleHistory(event: any): void {
     event.preventDefault()
-    this.setState({...this.state, history: !this.state.isHistory})
+    this.setState({ ...this.state, history: !this.state.isHistory })
   }
 
   render() {
@@ -92,17 +94,17 @@ export class AppComponent extends React.Component<any, AppState> {
     const appStyle = {
       margin: `0px`,
       padding: `0px`,
-	  overflow: 'hidden' as 'hidden',
+      overflow: 'hidden' as 'hidden',
     }
 
-	const mainStyle = {
-	  float: 'left',
+    const mainStyle = {
+      float: 'left',
     }
 
-	const slideStyle = {
-	  float: 'left',
-	  marginLeft: '20px',
-	  overflow: 'hidden' as 'hidden',
+    const slideStyle = {
+      float: 'left',
+      marginLeft: '20px',
+      overflow: 'hidden' as 'hidden',
     }
 
     const boardProps = {
@@ -114,9 +116,9 @@ export class AppComponent extends React.Component<any, AppState> {
     const panelProps: IPanelProps = {
       started: this.pausedInterval > 0 ? true : false,
       handleStart: this.handleStart.bind(this),
-	  handleOption: this.handleOption.bind(this),
-	  handleGlider: this.handleGlider.bind(this),
-	  handleHistory: this.handleHistory.bind(this),
+      handleOption: this.handleOption.bind(this),
+      handleGlider: this.handleGlider.bind(this),
+      handleHistory: this.handleHistory.bind(this),
     }
 
 

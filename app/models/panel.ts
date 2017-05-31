@@ -1,11 +1,9 @@
-import { TStyle } from '../utils'
+import { TStyle } from 'styles'
 import * as React from 'react'
 
 export interface IPanelState {
   styles: {
-    restart: Array<Object>
-    startPause: Array<Object>
-    count: Array<Object>
+    start: Array<TStyle>
   }
 }
 

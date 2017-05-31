@@ -1,11 +1,13 @@
 {
     "compilerOptions": {
-        "outDir": "./public/",
+		"rootDir": "./app",
+        "outDir": "./public",
+        "module": "commonjs",
+        "target": "es6",
         "sourceMap": true,
         "noImplicitAny": false,
-        "module": "commonjs",
-        "target": "es5",
-        "jsx": "react"
+        "jsx": "react",
+		"baseUrl": "app"
     },
     "include": [
         "./app/**/*"

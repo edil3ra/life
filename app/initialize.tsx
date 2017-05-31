@@ -1,6 +1,6 @@
 import * as ReactDOM from 'react-dom'
 import * as React from 'react'
-import { AppComponent } from './components/app'
+import { AppComponent } from 'components/app'
 
 
 if (module.hot) {
