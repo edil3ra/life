@@ -26,9 +26,9 @@ export class AppComponent extends React.Component<any, AppState> {
     super()
     this.state = {
       cells: createCells(WIN_X, WIN_Y, CELL_COUNT),
-      isHistory: true,
-      isGlider: true,
-      isOption: true,
+      isHistory: false,
+      isGlider: false,
+      isOption: false,
     }
   }
 
@@ -74,21 +74,26 @@ export class AppComponent extends React.Component<any, AppState> {
 
   handleOption(event: any): void {
     event.preventDefault()
-    this.setState({ ...this.state, option: !this.state.isOption })
+    this.setState({ ...this.state, isOption: !this.state.isOption })
   }
 
   handleGlider(event: any): void {
     event.preventDefault()
-    this.setState({ ...this.state, glider: !this.state.isGlider })
+    this.setState({ ...this.state, isGlider: !this.state.isGlider })
   }
 
   handleHistory(event: any): void {
     event.preventDefault()
-    this.setState({ ...this.state, history: !this.state.isHistory })
+    this.setState({ ...this.state, isHistory: !this.state.isHistory })
   }
 
   render() {
-    const { isGlider, isHistory, isOption, cells } = this.state
+    const {
+	  isGlider,
+	  isHistory,
+	  isOption,
+	  cells,
+	} = this.state
 
 
     const appStyle = {
@@ -114,7 +119,10 @@ export class AppComponent extends React.Component<any, AppState> {
     }
 
     const panelProps: IPanelProps = {
-      started: this.pausedInterval > 0 ? true : false,
+      isStarted: this.pausedInterval > 0 ? true : false,
+	  isGlider: isGlider,
+	  isHistory: isHistory,
+	  isOption: isOption,
       handleStart: this.handleStart.bind(this),
       handleOption: this.handleOption.bind(this),
       handleGlider: this.handleGlider.bind(this),

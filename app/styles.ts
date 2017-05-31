@@ -1,8 +1,6 @@
 export interface IStyle {
   panel: Object
   button: Object
-  restart: Object
-  startPause: Object
   count: Object
   red: Object
   green: Object
@@ -10,63 +8,80 @@ export interface IStyle {
   redHover: Object
   greenHover: Object
   blueHover: Object
+  floatLeft: Object
+  floatRight: Object
 };
 
-export const styles: IStyle  = {
-  panel:{
-	'margin': 'auto',
-	'width': `500px`,
-	'height': `50px`,
-	'backgroundColor': `#efefef`,
-	'overflow': 'hidden',
+export const styles: IStyle = {
+  panel: {
+    'margin': 'auto',
+    'width': `500px`,
+    'height': `50px`,
+    'backgroundColor': `#efefef`,
+    'overflow': 'hidden',
   },
   button: {
-	'display': 'block',
-	'height': '50px',
-	'float': 'left',
-	'margin': '0',
-	'padding': '10px',
-	'cursor': 'pointer',
-	'fontSize': '1em',
-	'color': '#ffffff',
-	'border': 'none'
+    'display': 'block',
+    'height': '50px',
+	'width': '100px',
+    'margin': '0',
+    'padding': '10px',
+    'cursor': 'pointer',
+    'fontSize': '1em',
+    'color': '#ffffff',
+    'border': 'none'
   },
-  restart: {
+  smallButton:{
+	'width': '50px',
   },
-  startPause: {
-	'marginLeft': '10px',
+  
+  mediumButton:{
+	'width': '100px',
   },
+
+  LargeButton:{
+	'width': '150px',
+  },
+  
+  
   count: {
-	'padding': '0px',
-	'marginLeft': '10px',
+    'padding': '0px',
+    'marginLeft': '10px',
   },
   red: {
-	'color': '#ffffff',
-	'backgroundColor': '#480000',
+    'color': '#ffffff',
+    'backgroundColor': '#940000',
   },
   green: {
-	'color': '#ffffff',
-	'backgroundColor': '#00C717',
-	'textShadow': '-1px 1px #002E00',
+    'color': '#ffffff',
+    'backgroundColor': '#00C717',
+    'textShadow': '-1px 1px #002E00',
   },
   blue: {
-	'color': '#ffffff',
-	'backgroundColor': '#1B00C7',
-	'textShadow': '-1px 1px #000061',
+    'color': '#ffffff',
+    'backgroundColor': '#1B00C7',
+    'textShadow': '-1px 1px #000061',
   },
   redHover: {
-	'backgroundColor': '#940000',
+	'backgroundColor': '#480000',
   },
   greenHover: {
-	'backgroundColor': '#009400',
+    'backgroundColor': '#009400',
   },
   blueHover: {
-	'backgroundColor': '#000094',
-  }
-  
+    'backgroundColor': '#000094',
+  },
+  floatRight: {
+	'float': 'right',
+  },
+  floatLeft: {
+	'float': 'left',
+  },  
 }
 
-export type TStyle = { [P in keyof IStyle]?: IStyle[P] }
+
+export type TStyle = {[P in keyof IStyle]?: IStyle[P]}
+export type TStyleKey = {[P in keyof IStyle]: P}
 
 
 export function display(styles: Array<TStyle>): Object {
@@ -86,6 +101,8 @@ export function pop(styles: Array<TStyle>): Array<TStyle> {
 export function remove(styles: Array<TStyle>, style: TStyle): Array<TStyle> {
   const index = styles.indexOf(style)
   const start = styles.slice(0, index)
-  const end = styles.slice(index)
-  return [...start, ...end]
+  const end = styles.slice(index + 1)
+  const result = index == -1 ? styles : [...start, ...end]
+  return result
 }
+

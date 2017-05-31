@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { CELL_MIN_SCALE, CELL_MAX_SCALE } from 'config'
-import { IPanelProps, IPanelState} from 'models/panel'
+import { IPanelProps, IPanelState } from 'models/panel'
 import * as styles from 'styles'
 
 
@@ -10,58 +10,134 @@ export class PanelComponent extends React.Component<IPanelProps, IPanelState> {
   public props: IPanelProps
   constructor(props) {
     super(props)
-    const startButtonColor = props.started ? styles.red : styles.green
+    const startButtonColor = props.started ? styles.styles.red : styles.styles.green
     this.state = {
       styles: {
-        start: [styles.button, styles.blue, styles.restart],
+        start: [styles.styles.button, styles.styles.floatLeft, styles.styles.red],
+        option: [styles.styles.button, styles.styles.smallButton, styles.styles.floatRight, styles.styles.red],
+        glider: [styles.styles.button, styles.styles.smallButton, styles.styles.floatRight, styles.styles.red],
+        history: [styles.styles.button, styles.styles.smallButton, styles.styles.floatRight, styles.styles.red],
       }
     }
   }
 
-  protected appendStyle(key: string, item: Object): void {
+
+
+  handleMouseEnter(cond: boolean, key: string, styleTrue: styles.TStyle, styleFalse: styles.TStyle): void {
+    const newStyles = cond ?
+      styles.push(this.state.styles[key], styleTrue) :
+      styles.push(this.state.styles[key], styleFalse)
     const cloned = { ...this.state }
-    cloned["styles"][key].push(item)
+    this.state.styles[key] = newStyles
     this.setState(cloned)
   }
 
-  protected removeStyle(key: string): void {
+
+  handleMouseOut(cond: boolean, key: string, styleTrue: styles.TStyle, styleFalse: styles.TStyle): void {
+    const newStyles = cond ?
+      styles.remove(this.state.styles[key], styleTrue) :
+      styles.remove(this.state.styles[key], styleFalse)
     const cloned = { ...this.state }
-    cloned['styles'][key].pop()
+    this.state.styles[key] = newStyles
     this.setState(cloned)
   }
 
-  protected changeStartPauseStyle(event: any): void {
-    event.preventDefault()
+  handleMouseClick(cond: boolean, key: string, styleTrue: styles.TStyle, styleFalse: styles.TStyle): void {
+    const initialStyle = this.state.styles[key]
+    const style1 = cond ?
+      styles.remove(initialStyle, styleTrue) :
+      styles.remove(initialStyle, styleFalse)
+
+    const style2 = styles.remove(style1, styles.styles.redHover)
+    const style3 = styles.remove(style2, styles.styles.greenHover)
+
+    const style4 = cond ?
+      styles.push(style3, styleFalse) :
+      styles.push(style3, styleTrue)
+
     const cloned = { ...this.state }
-    cloned['styles']['start'][1] = this.props.started ?
-      styles.green : styles.red
+    this.state.styles[key] = style4
     this.setState(cloned)
   }
-
 
   render() {
     const {
-	  started,
+	  isStarted,
+      isGlider,
+      isHistory,
+      isOption,
       handleStart,
+      handleOption,
+      handleGlider,
+      handleHistory,
 	} = this.props
 
+
+    const renderStart = (
+      <button style={styles.display(this.state.styles.start)}
+        onMouseEnter={(_ => this.handleMouseEnter(isStarted, 'start', styles.styles.redHover, styles.styles.greenHover))}
+        onMouseOut={(_ => this.handleMouseOut(isStarted, 'start', styles.styles.redHover, styles.styles.greenHover))}
+        onClick={(e) => {
+          handleStart(e)
+          this.handleMouseClick(isStarted, 'start', styles.styles.red, styles.styles.green)
+        }}>
+        {isStarted ?
+          <i className="fa fa-pause" aria-hidden="true"></i> :
+          <i className="fa fa-play" aria-hidden="true"></i>
+        }
+      </button>
+    )
+
+
+    const renderOption = (
+      <button style={styles.display(this.state.styles.option)}
+        onMouseEnter={(_ => this.handleMouseEnter(isOption, 'option', styles.styles.redHover, styles.styles.greenHover))}
+        onMouseOut={(_ => this.handleMouseOut(isOption, 'option', styles.styles.redHover, styles.styles.greenHover))}
+        onClick={(e) => {
+          handleOption(e)
+          this.handleMouseClick(isOption, 'option', styles.styles.red, styles.styles.green)
+        }}>
+        <i className="fa fa-question" aria-hidden="true"></i>
+      </button>
+    )
+
+	
+    const renderGlider = (
+      <button style={styles.display(this.state.styles.glider)}
+        onMouseEnter={(_ => this.handleMouseEnter(isGlider, 'glider', styles.styles.redHover, styles.styles.greenHover))}
+        onMouseOut={(_ => this.handleMouseOut(isGlider, 'glider', styles.styles.redHover, styles.styles.greenHover))}
+        onClick={(e) => {
+          handleGlider(e)
+          this.handleMouseClick(isGlider, 'glider', styles.styles.red, styles.styles.green)
+        }}>
+        <i className="fa fa-th" aria-hidden="true"></i>
+      </button>
+    )
+
+    const renderHistory = (
+      <button style={styles.display(this.state.styles.history)}
+        onMouseEnter={(_ => this.handleMouseEnter(isHistory, 'history', styles.styles.redHover, styles.styles.greenHover))}
+        onMouseOut={(_ => this.handleMouseOut(isHistory, 'history', styles.styles.redHover, styles.styles.greenHover))}
+        onClick={(e) => {
+          handleHistory(e)
+          this.handleMouseClick(isHistory, 'history', styles.styles.red, styles.styles.green)
+        }}>
+        <i className="fa fa-history " aria-hidden="true"></i>
+      </button>
+    )
+
     return (
-      <div style={styles.panel}>
+      <div style={styles.styles.panel}>
         <form>
-          <button style={styles.display(this.state.styles.start)}
-            onMouseEnter={(_ => started ?
-              this.appendStyle('startPause', styles.redHover) :
-              this.appendStyle('startPause', styles.greenHover)
-            )}
-            onMouseLeave={(_ => this.removeStyle('startPause'))}
-            onClick={(e) => {
-              handleStart(e)
-              this.changeStartPauseStyle(e)
-            }}>
-            {started ? "Paused" : "Start"}
-          </button>
+          {renderStart}
+          {renderHistory}
+          {renderGlider}
+          {renderOption}
         </form>
       </div >
     )
+
+
   }
+
 }
