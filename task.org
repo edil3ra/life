@@ -1,12 +1,2 @@
-* tasks [1/2]
-+ [X] create Board component
-+ [ ] create Cell component
-
-* Board
-  + state
-	+ width
-	+ height
-	  
-
- 
-* Cell
+* Panel [ ]
+  + make a button with icon font
