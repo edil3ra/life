@@ -2,7 +2,7 @@ import * as React from 'react'
 import { CellComponent } from './cell'
 import { ICellProps } from '../models/cell'
 import { IBoardProps } from '../models/board'
-
+import { styles } from 'styles'
 
 
 export class BoardComponent extends React.Component<IBoardProps, any> {
@@ -13,19 +13,8 @@ export class BoardComponent extends React.Component<IBoardProps, any> {
   }
 
   render() {
-    const boardStyle = {
-      position: 'relative' as 'relative',
-      margin: 'auto',
-      width: `${this.props.width}.px`,
-      height: `${this.props.height}.px`,
-      backgroundColor: `#efefef`,
-    };
-
-    const boardStyleUl = {
-      listStyleType: `none`,
-      margin: `0`,
-      padding: `0`,
-    };
+	const boardStyle = styles.boardF(this.props.width, this.props.height, `#efefef`)
+    const boardStyleUl = styles.boardUl
 
 
     const cells = this.props.cells.map((cell, i) => {

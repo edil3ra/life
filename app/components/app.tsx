@@ -4,11 +4,11 @@ import { PanelComponent } from './panel'
 import { GliderComponent } from './glider'
 import { HistoryComponent } from './history'
 import { OptionComponent } from './option'
-import { ICellProps, createCells, cellsCount, cellsCountLife, cellsLife, updateCells, simulate } from '../models/cell'
-import { IPanelProps, IPanelState } from '../models/panel'
+import { ICellProps, createCells, cellsCount, cellsCountLife, cellsLife, updateCells, simulate } from 'models/cell'
+import { IPanelProps, IPanelState } from 'models/panel'
 
 
-import { WIN_X, WIN_Y, CELL_COUNT, CELL_MIN_SCALE, CELL_MAX_SCALE } from '../config'
+import { WIN_X, WIN_Y, CELL_COUNT, CELL_MIN_SCALE, CELL_MAX_SCALE } from 'config'
 
 
 export interface AppState {
@@ -54,7 +54,6 @@ export class AppComponent extends React.Component<any, AppState> {
   componentWillMount() {
     this.start()
   }
-
 
 
   handleStart(event: any): void {

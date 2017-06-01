@@ -8,15 +8,18 @@ import * as styles from 'styles'
 export class PanelComponent extends React.Component<IPanelProps, IPanelState> {
   public state: IPanelState
   public props: IPanelProps
-  constructor(props) {
+  constructor(props: IPanelProps) {
     super(props)
-    const startButtonColor = props.started ? styles.styles.red : styles.styles.green
+    const startButtonColor = props.isStarted ? styles.styles.red : styles.styles.green
+    const glidertButtonColor = props.isGlider ? styles.styles.green : styles.styles.red
+    const historyButtonColor = props.isHistory ? styles.styles.green : styles.styles.red
+    const optionButtonColor = props.isOption ? styles.styles.green : styles.styles.red
     this.state = {
       styles: {
-        start: [styles.styles.button, styles.styles.floatLeft, styles.styles.red],
-        option: [styles.styles.button, styles.styles.smallButton, styles.styles.floatRight, styles.styles.red],
-        glider: [styles.styles.button, styles.styles.smallButton, styles.styles.floatRight, styles.styles.red],
-        history: [styles.styles.button, styles.styles.smallButton, styles.styles.floatRight, styles.styles.red],
+        start: [styles.styles.button, styles.styles.floatLeft, startButtonColor],
+        option: [styles.styles.button, styles.styles.smallButton, styles.styles.floatRight, optionButtonColor],
+        glider: [styles.styles.button, styles.styles.smallButton, styles.styles.floatRight, glidertButtonColor],
+        history: [styles.styles.button, styles.styles.smallButton, styles.styles.floatRight, historyButtonColor],
       }
     }
   }
@@ -91,11 +94,11 @@ export class PanelComponent extends React.Component<IPanelProps, IPanelState> {
 
     const renderOption = (
       <button style={styles.display(this.state.styles.option)}
-        onMouseEnter={(_ => this.handleMouseEnter(isOption, 'option', styles.styles.redHover, styles.styles.greenHover))}
-        onMouseOut={(_ => this.handleMouseOut(isOption, 'option', styles.styles.redHover, styles.styles.greenHover))}
+        onMouseEnter={(_ => this.handleMouseEnter(isOption, 'option', styles.styles.greenHover, styles.styles.redHover))}
+        onMouseOut={(_ => this.handleMouseOut(isOption, 'option', styles.styles.greenHover, styles.styles.redHover))}
         onClick={(e) => {
           handleOption(e)
-          this.handleMouseClick(isOption, 'option', styles.styles.red, styles.styles.green)
+          this.handleMouseClick(isOption, 'option', styles.styles.green, styles.styles.red)
         }}>
         <i className="fa fa-question" aria-hidden="true"></i>
       </button>
@@ -104,11 +107,11 @@ export class PanelComponent extends React.Component<IPanelProps, IPanelState> {
 	
     const renderGlider = (
       <button style={styles.display(this.state.styles.glider)}
-        onMouseEnter={(_ => this.handleMouseEnter(isGlider, 'glider', styles.styles.redHover, styles.styles.greenHover))}
-        onMouseOut={(_ => this.handleMouseOut(isGlider, 'glider', styles.styles.redHover, styles.styles.greenHover))}
+        onMouseEnter={(_ => this.handleMouseEnter(isGlider, 'glider', styles.styles.greenHover, styles.styles.redHover))}
+        onMouseOut={(_ => this.handleMouseOut(isGlider, 'glider', styles.styles.greenHover, styles.styles.redHover))}
         onClick={(e) => {
           handleGlider(e)
-          this.handleMouseClick(isGlider, 'glider', styles.styles.red, styles.styles.green)
+          this.handleMouseClick(isGlider, 'glider', styles.styles.green, styles.styles.red)
         }}>
         <i className="fa fa-th" aria-hidden="true"></i>
       </button>
@@ -116,11 +119,11 @@ export class PanelComponent extends React.Component<IPanelProps, IPanelState> {
 
     const renderHistory = (
       <button style={styles.display(this.state.styles.history)}
-        onMouseEnter={(_ => this.handleMouseEnter(isHistory, 'history', styles.styles.redHover, styles.styles.greenHover))}
-        onMouseOut={(_ => this.handleMouseOut(isHistory, 'history', styles.styles.redHover, styles.styles.greenHover))}
+        onMouseEnter={(_ => this.handleMouseEnter(isHistory, 'history', styles.styles.greenHover, styles.styles.redHover))}
+        onMouseOut={(_ => this.handleMouseOut(isHistory, 'history', styles.styles.greenHover, styles.styles.redHover))}
         onClick={(e) => {
           handleHistory(e)
-          this.handleMouseClick(isHistory, 'history', styles.styles.red, styles.styles.green)
+          this.handleMouseClick(isHistory, 'history', styles.styles.green, styles.styles.red)
         }}>
         <i className="fa fa-history " aria-hidden="true"></i>
       </button>

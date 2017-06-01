@@ -12,7 +12,7 @@ export interface ICellProps {
 }
 
 
-export function createCells(width, height, count): Array<ICellProps> {
+export function createCells(width: number, height: number, count: number, random=false): Array<ICellProps> {
   const sizeX: number = Math.sqrt(width * height / count)
   const sizeY: number = Math.sqrt(width * height / count)
   const countX: number = Math.sqrt(count)
@@ -26,7 +26,7 @@ export function createCells(width, height, count): Array<ICellProps> {
       height: sizeY,
       left: (i % countX) * sizeX,
       top: (Math.floor(i / countY)) * sizeY,
-      life: Math.random() <= 0.5 ? false : true,
+      life: random ? Math.random() <= 0.5 ? false : true : false,
       colorAlive: CELL_COLOR_ALIVE,
       colorDeath: CELL_COLOR_DEATH,
     }

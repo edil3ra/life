@@ -10,6 +10,12 @@ export interface IStyle {
   blueHover: Object
   floatLeft: Object
   floatRight: Object
+  smallButton: Object
+  mediumButton: Object
+  largeButton: Object
+  boardF: (width: number, height: number, color: string)  => Object
+  boardUl: Object
+  
 };
 
 export const styles: IStyle = {
@@ -34,15 +40,29 @@ export const styles: IStyle = {
   smallButton:{
 	'width': '50px',
   },
-  
-  mediumButton:{
+  mediumButton: {
 	'width': '100px',
   },
-
-  LargeButton:{
+  largeButton: {
 	'width': '150px',
   },
   
+  
+  boardF(width: number, height: number, color: string): Object {
+	return {
+	  'position': 'relative' as 'relative',
+      'margin': 'auto',
+      'width': `${width}.px`,
+      'height': `${height}.px`,
+      'backgroundColor': `${color}`,	  
+	}
+  },
+
+  boardUl: {
+	'listStyleType': `none`,
+    'margin': `0`,
+    'padding': `0`,
+  },
   
   count: {
     'padding': '0px',
