@@ -9,8 +9,8 @@ export class CellComponent extends React.Component<ICellProps, any> {
   }
 
   render() {
-    const { width, height, left, top, life, colorAlive, colorDeath, borderBottom, borderRight } = this.props
-	const cellStyle = styles.cellF(width, height, left, top, life ? colorDeath : colorAlive, borderBottom, borderRight)
+    const { width, height, left, top, life, colorLife, colorDeath, borderBottom, borderRight } = this.props
+	const cellStyle = styles.cellF(width, height, left, top, life ? colorLife : colorDeath, borderBottom, borderRight)
     return (
       <li style={cellStyle}></li>
     )

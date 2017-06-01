@@ -1,5 +1,8 @@
 export interface IStyle {
-  panel: Object
+  app: Object
+  main: Object
+  slide: Object
+  panel: (background: string) => Object
   button: Object
   count: Object
   red: Object
@@ -13,6 +16,10 @@ export interface IStyle {
   smallButton: Object
   mediumButton: Object
   largeButton: Object
+  marginButton: Object
+  wrapperDeadLife: Object
+  deadButton: Object
+  lifeButton: Object
   boardF: (width: number, height: number, background: string) => Object
   boardUl: Object
   cellF: (width: number, height: number, left: number, top: number,
@@ -20,13 +27,33 @@ export interface IStyle {
 }
 
 export const styles: IStyle = {
-  panel: {
-    'margin': 'auto',
-    'width': `500px`,
-    'height': `50px`,
-    'backgroundColor': `#efefef`,
-    'overflow': 'hidden',
+
+  app: {
+    'margin': `0px`,
+    'padding': `0px`,
+    'overflow': 'hidden' as 'hidden',
   },
+
+  main: {
+	'float': 'left'
+  },
+  
+  slide: {
+    'float': 'left',
+    'marginLeft': '20px',
+    'overflow': 'hidden' as 'hidden',
+  },
+  
+  panel(background: string): Object {
+	return {
+      'margin': 'auto',
+      'width': `500px`,
+      'height': `50px`,
+      'backgroundColor': background,
+      'overflow': 'hidden',	  
+	}
+  },
+  
   button: {
     'display': 'block',
     'height': '50px',
@@ -47,8 +74,32 @@ export const styles: IStyle = {
   largeButton: {
     'width': '150px',
   },
+  marginButton: {
+	'marginRight': '2px',
+  },
 
+  wrapperDeadLife: {
+	'overflow': 'hidden',
+	'position': 'relative',
+	'width': '25px',
+	'height': '50px',
+  },
+  
+  deadButton: {
+	'position': 'absolute',
+	'height': '24px',
+	'left': 0,
+	'top': 0,
+  },
 
+  lifeButton: {
+	'position': 'absolute',
+	'left': 0,
+	'top': '26px',
+	'height': '24px',
+  },
+
+  
   boardF(width: number, height: number, background: string): Object {
     return {
       'position': 'relative' as 'relative',

@@ -1,4 +1,4 @@
-import { CELL_COLOR_ALIVE, CELL_COLOR_DEATH, CELL_BORDER_BOTTOM, CELL_BORDER_RIGHT } from 'config'
+import { CELL_COLOR_LIFE, CELL_COLOR_DEATH, CELL_BORDER_BOTTOM, CELL_BORDER_RIGHT } from 'config'
 
 
 export interface ICellProps {
@@ -7,14 +7,17 @@ export interface ICellProps {
   left: number
   top: number
   life: boolean
-  colorAlive: string
+  colorLife: string
   colorDeath: string
   borderBottom: number
   borderRight: number
 }
 
+export type TCellPropsOptional = {
+  [P in keyof ICellProps]?: ICellProps[P]
+}
 
-export function createCells(width: number, height: number, count: number, random=false): Array<ICellProps> {
+export function cellsCreate(width: number, height: number, count: number, random = false): Array<ICellProps> {
   const sizeX: number = Math.sqrt(width * height / count)
   const sizeY: number = Math.sqrt(width * height / count)
   const countX: number = Math.sqrt(count)
@@ -28,8 +31,8 @@ export function createCells(width: number, height: number, count: number, random
       height: sizeY,
       left: (i % countX) * sizeX,
       top: (Math.floor(i / countY)) * sizeY,
-      life: random ? Math.random() <= 0.5 ? false : true : false,
-      colorAlive: CELL_COLOR_ALIVE,
+      life: random ? Math.random() <= 0.5: false,
+      colorLife: CELL_COLOR_LIFE,
       colorDeath: CELL_COLOR_DEATH,
       borderBottom: CELL_BORDER_BOTTOM,
       borderRight: CELL_BORDER_RIGHT,
@@ -42,6 +45,19 @@ export function createCells(width: number, height: number, count: number, random
 
 export function cellsLife(cells: Array<ICellProps>): Array<boolean> {
   return cells.map((cell) => cell.life)
+}
+
+export function cellsChange(cells: Array<ICellProps>, cellUpdate: TCellPropsOptional): Array<ICellProps> {
+  return cells.map((cell: ICellProps) => {
+    return { ...cell, ...cellUpdate }
+  })
+}
+
+
+export function cellsRandom(cells: Array<ICellProps>): Array<ICellProps> {
+  return cells.map((cell: ICellProps) => {
+    return { ...cell, ...{ life: Math.random() <= 0.5 } }
+  })
 }
 
 export function cellsCount(cells: Array<boolean>): Array<number> {
@@ -78,7 +94,7 @@ export function cellsCountLife(cells: Array<boolean>, counts: Array<number>): Ar
 }
 
 
-export function updateCells(cells: Array<ICellProps>, life: Array<boolean>): Array<ICellProps> {
+export function cellsUpdate(cells: Array<ICellProps>, life: Array<boolean>): Array<ICellProps> {
   let cellsUpdated: Array<ICellProps> = new Array()
   for (let i = 0; i < cells.length; i++) {
     cellsUpdated.push({
@@ -117,6 +133,6 @@ export function simulate(cells: Array<ICellProps>): Array<ICellProps> {
       }
     }
   })
-  return updateCells(cells, lifesSimulate)
+  return cellsUpdate(cells, lifesSimulate)
 }
 

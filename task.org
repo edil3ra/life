@@ -1,0 +1,30 @@
+* app [0/3]
+  + [ ] make an history of cells
+  + [ ] make be current cell, 
+  + [ ] make be start cell, (trigger it when we launch the simulation)
+	
+
+* panel [5/6]
+ + [X] start button toggle *play pause the simulation*
+ + [X] glider button toggle *show hide*
+ + [X] history button toggle *show hide*
+ + [X] option button toggle *show hide*
+ + [X] random button trigger *launch app function*
+ + [ ] reset button trigger *launch app function*
+ + [2/2] death/alive button splitted
+   + [X] death button trigger *all cells death* (color of the death cell)
+   + [X] alive button trigger *all cells alive* (color of the alive cell)
+
+
+
+
+* glider []
+
+
+* history [] 
+  
+
+ 
+* refactor [0/2]
+  + [ ] make the remove function accept a list of styles
+  + [ ] make the insert function accept a list of styles
