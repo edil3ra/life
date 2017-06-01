@@ -1,4 +1,4 @@
-import { CELL_COLOR_ALIVE, CELL_COLOR_DEATH } from 'config'
+import { CELL_COLOR_ALIVE, CELL_COLOR_DEATH, CELL_BORDER_BOTTOM, CELL_BORDER_RIGHT } from 'config'
 
 
 export interface ICellProps {
@@ -9,6 +9,8 @@ export interface ICellProps {
   life: boolean
   colorAlive: string
   colorDeath: string
+  borderBottom: number
+  borderRight: number
 }
 
 
@@ -29,6 +31,8 @@ export function createCells(width: number, height: number, count: number, random
       life: random ? Math.random() <= 0.5 ? false : true : false,
       colorAlive: CELL_COLOR_ALIVE,
       colorDeath: CELL_COLOR_DEATH,
+      borderBottom: CELL_BORDER_BOTTOM,
+      borderRight: CELL_BORDER_RIGHT,
     }
     cells.push(cellProps)
   }

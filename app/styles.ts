@@ -13,10 +13,11 @@ export interface IStyle {
   smallButton: Object
   mediumButton: Object
   largeButton: Object
-  boardF: (width: number, height: number, color: string)  => Object
+  boardF: (width: number, height: number, background: string) => Object
   boardUl: Object
-  
-};
+  cellF: (width: number, height: number, left: number, top: number,
+		  background: string, borderRight?:number, borderBottom?:number) => Object 
+}
 
 export const styles: IStyle = {
   panel: {
@@ -29,7 +30,7 @@ export const styles: IStyle = {
   button: {
     'display': 'block',
     'height': '50px',
-	'width': '100px',
+    'width': '100px',
     'margin': '0',
     'padding': '10px',
     'cursor': 'pointer',
@@ -37,33 +38,45 @@ export const styles: IStyle = {
     'color': '#ffffff',
     'border': 'none'
   },
-  smallButton:{
-	'width': '50px',
+  smallButton: {
+    'width': '50px',
   },
   mediumButton: {
-	'width': '100px',
+    'width': '100px',
   },
   largeButton: {
-	'width': '150px',
+    'width': '150px',
   },
-  
-  
-  boardF(width: number, height: number, color: string): Object {
-	return {
-	  'position': 'relative' as 'relative',
+
+
+  boardF(width: number, height: number, background: string): Object {
+    return {
+      'position': 'relative' as 'relative',
       'margin': 'auto',
       'width': `${width}.px`,
       'height': `${height}.px`,
-      'backgroundColor': `${color}`,	  
-	}
+      'backgroundColor': `${background}`,
+    }
   },
 
   boardUl: {
-	'listStyleType': `none`,
+    'listStyleType': `none`,
     'margin': `0`,
     'padding': `0`,
   },
-  
+
+  cellF(width: number, height: number, left: number, top: number,
+    background: string, borderRight = 0, borderBottom = 0): Object {
+    return {
+      'position': 'absolute' as 'absolute',
+      'width': `${width - borderRight}px`,
+      'height': `${height - borderBottom}px`,
+      'left': `${left}px`,
+      'top': `${top}px`,
+      'backgroundColor': `${background}`,
+    }
+  },
+
   count: {
     'padding': '0px',
     'marginLeft': '10px',
@@ -83,7 +96,7 @@ export const styles: IStyle = {
     'textShadow': '-1px 1px #000061',
   },
   redHover: {
-	'backgroundColor': '#480000',
+    'backgroundColor': '#480000',
   },
   greenHover: {
     'backgroundColor': '#009400',
@@ -92,11 +105,11 @@ export const styles: IStyle = {
     'backgroundColor': '#000094',
   },
   floatRight: {
-	'float': 'right',
+    'float': 'right',
   },
   floatLeft: {
-	'float': 'left',
-  },  
+    'float': 'left',
+  },
 }
 
 

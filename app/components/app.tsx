@@ -8,7 +8,7 @@ import { ICellProps, createCells, cellsCount, cellsCountLife, cellsLife, updateC
 import { IPanelProps, IPanelState } from 'models/panel'
 
 
-import { WIN_X, WIN_Y, CELL_COUNT, CELL_MIN_SCALE, CELL_MAX_SCALE } from 'config'
+import { WIN_X, WIN_Y, CELL_COUNT, CELL_MIN_SCALE, CELL_MAX_SCALE, CELL_RANDOM } from 'config'
 
 
 export interface AppState {
@@ -25,7 +25,7 @@ export class AppComponent extends React.Component<any, AppState> {
   constructor() {
     super()
     this.state = {
-      cells: createCells(WIN_X, WIN_Y, CELL_COUNT),
+      cells: createCells(WIN_X, WIN_Y, CELL_COUNT, CELL_RANDOM),
       isHistory: false,
       isGlider: false,
       isOption: false,
