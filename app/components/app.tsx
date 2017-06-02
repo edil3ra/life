@@ -8,7 +8,7 @@ import { ICellProps, cellsCreate, cellsCount, cellsCountLife, cellsLife, cellsUp
 import { IPanelProps, IPanelState } from 'models/panel'
 import { styles } from 'styles'
 
-import { WIN_X, WIN_Y, CELL_COUNT, CELL_MIN_SCALE, CELL_MAX_SCALE, CELL_RANDOM } from 'config'
+import { WIN_X, WIN_Y, SPEED_INIT, SPEED_FACTOR, SPEED_MIN, SPEED_MAX, CELL_COUNT, CELL_SCALE, CELL_MIN_SCALE, CELL_MAX_SCALE, CELL_RANDOM } from 'config'
 
 
 export interface AppState {
@@ -16,6 +16,8 @@ export interface AppState {
   isGlider: boolean,
   isHistory: boolean,
   isOption: boolean,
+  speed: number,
+  scale: number,
 }
 
 export class AppComponent extends React.Component<any, AppState> {
@@ -25,10 +27,12 @@ export class AppComponent extends React.Component<any, AppState> {
   constructor() {
     super()
     this.state = {
-      cells: cellsCreate(WIN_X, WIN_Y, CELL_COUNT, CELL_RANDOM),
+      cells: cellsCreate(WIN_X, WIN_Y, CELL_SCALE, CELL_RANDOM),
       isHistory: false,
       isGlider: false,
       isOption: false,
+      scale: CELL_SCALE,
+      speed: SPEED_INIT
     }
 
     this.handleStart = this.handleStart.bind(this)
@@ -39,20 +43,31 @@ export class AppComponent extends React.Component<any, AppState> {
     this.handleLife = this.handleLife.bind(this)
     this.handleRandom = this.handleRandom.bind(this)
     this.handleSimulate = this.handleSimulate.bind(this)
+    this.handleSizeDecrease = this.handleSizeDecrease.bind(this)
+    this.handleSizeIncrease = this.handleSizeIncrease.bind(this)
+    this.handleDecelerate = this.handleDecelerate.bind(this)
+    this.handleAccelerate = this.handleAccelerate.bind(this)
   }
 
 
   protected start(): any {
     this.pausedInterval = setInterval(() => {
       this.update()
-    }, 1000)
+    }, this.state.speed * 1000)
+  }
+
+
+  protected restart(): any {
+	clearInterval(this.pausedInterval)
+    this.pausedInterval = setInterval(() => {
+      this.update()
+    }, this.state.speed * 1000)
   }
 
   protected pause(): any {
     clearInterval(this.pausedInterval)
     this.pausedInterval = 0
   }
-
 
 
   protected update() {
@@ -69,14 +84,6 @@ export class AppComponent extends React.Component<any, AppState> {
     event.preventDefault()
     this.pausedInterval == 0 ? this.start() : this.pause()
     this.forceUpdate()
-  }
-
-  handleCount(event: any): void {
-    event.preventDefault()
-    this.setState({
-      ...this.state,
-      cells: cellsCreate(WIN_X, WIN_Y, Math.pow(event.target.value, 2))
-    })
   }
 
 
@@ -120,18 +127,52 @@ export class AppComponent extends React.Component<any, AppState> {
     })
   }
 
+
+  handleAccelerate(event: any): void {
+    event.preventDefault()
+    const speed = this.state.speed - SPEED_FACTOR > SPEED_MAX ?
+      this.state.speed : this.state.speed - SPEED_FACTOR
+
+    this.setState({ ...this.state, speed: speed })
+	this.restart()
+	this.forceUpdate()
+  }
+
+  handleDecelerate(event: any): void {
+    event.preventDefault()
+    const speed = this.state.speed + SPEED_FACTOR < SPEED_MIN ?
+      this.state.speed : this.state.speed + SPEED_FACTOR
+
+    this.setState({ ...this.state, speed: speed })
+	this.restart()
+	this.forceUpdate()
+  }
+
+  handleSizeIncrease(event: any): void {
+    event.preventDefault()
+    const scale = this.state.scale + 1 > CELL_MAX_SCALE ?
+      this.state.scale : this.state.scale + 1
+
+    this.setState({ ...this.state, scale: scale, cells: cellsCreate(WIN_X, WIN_Y, scale, true) })
+  }
+
+  handleSizeDecrease(event: any): void {
+    event.preventDefault()
+    const scale = this.state.scale - 1 < CELL_MIN_SCALE ?
+      this.state.scale : this.state.scale - 1
+    this.setState({ ...this.state, scale: scale, cells: cellsCreate(WIN_X, WIN_Y, scale, true) })
+
+  }
+
+
+
   handleSimulate(event: any): void {
     event.preventDefault()
-    // this.setState({
-    //   ...this.state,
-    //   cells: cellsRandom(this.state.cells)
-    // })
-	// console.log('thueon')
-	this.pause()
+    this.pause()
     this.forceUpdate()
-	
-	
   }
+
+
 
 
   render() {
@@ -164,6 +205,10 @@ export class AppComponent extends React.Component<any, AppState> {
       handleLife: this.handleLife,
       handleSimulate: this.handleSimulate,
       handleRandom: this.handleRandom,
+      handleDecelerate: this.handleDecelerate,
+      handleAccelerate: this.handleAccelerate,
+      handleSizeIncrease: this.handleSizeIncrease,
+      handleSizeDecrease: this.handleSizeDecrease,
     }
 
 

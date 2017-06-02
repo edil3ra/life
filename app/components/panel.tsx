@@ -11,7 +11,7 @@ export class PanelComponent extends React.Component<IPanelProps, IPanelState> {
 
   constructor(props: IPanelProps) {
     super(props)
-    const { button, floatLeft, floatRight, green, red, blue, smallButton, marginButton, deadButton, lifeButton, wrapperDeadLife } = styles.styles
+    const { button, floatLeft, floatRight, green, red, blue, smallButton, marginButton, deadButton, lifeButton, wrapperDeadLife, plusButton, minusButton } = styles.styles
 
 
     const startButtonColor = props.isStarted ? red : green
@@ -27,9 +27,11 @@ export class PanelComponent extends React.Component<IPanelProps, IPanelState> {
         glider: [button, smallButton, floatRight, glidertButtonColor, marginButton],
         history: [button, smallButton, floatRight, historyButtonColor],
         random: [button, smallButton, floatLeft, blue, marginButton],
-		simulate: [button, smallButton, floatLeft, blue, marginButton],
+        simulate: [button, smallButton, floatLeft, blue, marginButton],
         dead: [button, smallButton, deadButton, floatLeft, { backgroundColor: props.colorDeath }],
         life: [button, smallButton, lifeButton, floatLeft, { backgroundColor: props.colorLife }],
+        speedDecrease: [minusButton, floatLeft, blue],
+        speedIncrease: [plusButton, floatLeft, blue]
       }
     }
   }
@@ -103,11 +105,15 @@ export class PanelComponent extends React.Component<IPanelProps, IPanelState> {
       handleDead,
       handleLife,
       handleRandom,
-	  handleSimulate,
+      handleSimulate,
+      handleAccelerate,
+      handleDecelerate,
+      handleSizeDecrease,
+      handleSizeIncrease,
 	} = this.props
 
 
-    const { green, red, redHover, greenHover, blue, blueHover,  wrapperDeadLife } = styles.styles
+    const { green, red, redHover, greenHover, blue, blueHover, wrapperDeadLife, wrapperPlusMinus } = styles.styles
     const panelStyle = styles.styles.panel(PANEL_COLOR)
 
 
@@ -178,7 +184,7 @@ export class PanelComponent extends React.Component<IPanelProps, IPanelState> {
     )
 
 
-	const renderSimulate = (
+    const renderSimulate = (
       <button style={styles.display(this.state.styles.simulate)}
         onClick={(e) => {
           handleSimulate(e)
@@ -203,9 +209,48 @@ export class PanelComponent extends React.Component<IPanelProps, IPanelState> {
         onClick={(e) => {
           handleLife(e)
         }}>
-
       </button>
     )
+
+
+    const renderSizeIncrease = (
+      <button style={styles.display(this.state.styles.speedIncrease)}
+        onClick={(e) => {
+          handleSizeIncrease(e)
+        }}>
+        <i className="fa fa-plus" aria-hidden="true"></i>
+      </button>
+    )
+
+
+    const renderSizeDecrease = (
+      <button style={styles.display(this.state.styles.speedDecrease)}
+        onClick={(e) => {
+          handleSizeDecrease(e)
+        }}>
+        <i className="fa fa-minus" aria-hidden="true"></i>
+      </button>
+    )
+
+    const renderAccelerate = (
+      <button style={styles.display(this.state.styles.speedIncrease)}
+        onClick={(e) => {
+          handleAccelerate(e)
+        }}>
+        <i className="fa fa-forward" aria-hidden="true"></i>
+      </button>
+    )
+
+    const renderDecelerate = (
+      <button style={styles.display(this.state.styles.speedDecrease)}
+        onClick={(e) => {
+          handleDecelerate(e)
+        }}>
+        <i className="fa fa-backward" aria-hidden="true"></i>
+      </button>
+    )
+
+
 
     return (
       <div style={panelStyle}>
@@ -217,11 +262,18 @@ export class PanelComponent extends React.Component<IPanelProps, IPanelState> {
             {renderOption}
           </div>
           <div>
-		    {renderSimulate}
             {renderRandom}
             <div style={wrapperDeadLife}>
               {renderDead}
               {renderLife}
+            </div>
+            <div style={wrapperPlusMinus}>
+              {renderSizeDecrease}
+              {renderSizeIncrease}
+            </div>
+            <div style={wrapperPlusMinus}>
+              {renderDecelerate}
+              {renderAccelerate}
             </div>
           </div>
         </form>

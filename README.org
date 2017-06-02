@@ -1,0 +1,21 @@
+* Game of life build with react and typescript
+  It was my first project using react and typescript, so i did a lot of mistake
+  I end up droping the project cause the models was badly written,
+  I should separete the props and state from their components, huge mistake, it make the buisness model mix the the view model
+  Maybe, i will come back on it :-)
+* What went wrong
+  It used one models for representing a cell, and an for the array cells but i end up mixing the React Props and the a pure models,
+  Basicly the models and view are not separeted enough.
+  I should definitly used svg to render the table.
+  The board props should have one way less property.
+* What went right  
+  Handle all the css with react is kindy good idea, you have to write more code, but you can do your own animation,
+  the idea is to modify the style in the balise with react
+* What i was planning to do
+  Build an history of cells, display it in a panel
+  Handle event on the board in order to change the state of the cell,
+  
+  
+  
+
+  

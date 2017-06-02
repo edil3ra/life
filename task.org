@@ -3,7 +3,6 @@
   + [ ] make be current cell, 
   + [ ] make be start cell, (trigger it when we launch the simulation)
 	
-
 * panel [5/6]
  + [X] start button toggle *play pause the simulation*
  + [X] glider button toggle *show hide*
@@ -17,14 +16,13 @@
 
 
 
-
 * glider []
-
-
-* history [] 
-  
-
- 
+* history []  
 * refactor [0/2]
   + [ ] make the remove function accept a list of styles
   + [ ] make the insert function accept a list of styles
+
+<i class="fa fa-fast-forward" aria-hidden="true"></i>
+<i class="fa fa-fast-backward" aria-hidden="true"></i>
+<i class="fa fa-plus" aria-hidden="true"></i>
+<i class="fa fa-minus" aria-hidden="true"></i>

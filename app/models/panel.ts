@@ -13,6 +13,8 @@ export interface IPanelStyle {
   dead: Array<TStyle | Object>,
   random: Array<TStyle | Object>
   simulate: Array<TStyle | Object>
+  speedDecrease: Array<TStyle | Object>
+  speedIncrease: Array<TStyle | Object>
 }
 
 
@@ -32,4 +34,8 @@ export interface IPanelProps {
   handleDead: (event: any) => void
   handleRandom: (event: any) => void
   handleSimulate: (event: any) => void
+  handleDecelerate: (event: any) => void
+  handleAccelerate: (event: any) => void
+  handleSizeIncrease: (event: any) => void
+  handleSizeDecrease: (event: any) => void
 }

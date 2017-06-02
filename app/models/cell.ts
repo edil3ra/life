@@ -17,15 +17,17 @@ export type TCellPropsOptional = {
   [P in keyof ICellProps]?: ICellProps[P]
 }
 
-export function cellsCreate(width: number, height: number, count: number, random = false): Array<ICellProps> {
-  const sizeX: number = Math.sqrt(width * height / count)
-  const sizeY: number = Math.sqrt(width * height / count)
-  const countX: number = Math.sqrt(count)
-  const countY: number = Math.sqrt(count)
+export function cellsCreate(width: number, height: number, scale: number, random = false): Array<ICellProps> {
+
+  const sizeX: number = width  / scale
+  const sizeY: number = height / scale
+  const countX: number = scale
+  const countY: number = scale
+  
   const cells = new Array<ICellProps>()
 
   // create the cells
-  for (let i = 0; i < count; i++) {
+  for (let i = 0; i < Math.pow(scale, 2); i++) {
     const cellProps: ICellProps = {
       width: sizeX,
       height: sizeY,

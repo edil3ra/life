@@ -20,6 +20,9 @@ export interface IStyle {
   wrapperDeadLife: Object
   deadButton: Object
   lifeButton: Object
+  wrapperPlusMinus: Object
+  plusButton: Object
+  minusButton: Object
   boardF: (width: number, height: number, background: string) => Object
   boardUl: Object
   cellF: (width: number, height: number, left: number, top: number,
@@ -79,6 +82,7 @@ export const styles: IStyle = {
   },
 
   wrapperDeadLife: {
+	'float': 'left',
 	'overflow': 'hidden',
 	'position': 'relative',
 	'width': '25px',
@@ -88,6 +92,7 @@ export const styles: IStyle = {
   deadButton: {
 	'position': 'absolute',
 	'height': '24px',
+	'width': '24px',
 	'left': 0,
 	'top': 0,
   },
@@ -97,8 +102,42 @@ export const styles: IStyle = {
 	'left': 0,
 	'top': '26px',
 	'height': '24px',
+	'width': '24px',
   },
 
+
+
+  wrapperPlusMinus: {
+	'float': 'left',
+	'overflow': 'hidden',
+	'position': 'relative',
+	'width': '25px',
+	'height': '50px',
+  },
+  
+  plusButton: {
+	'position': 'absolute',
+	'height': '24px',
+	'width': '24px',
+	'left': 0,
+	'top': 0,
+	'margin': '0',
+    'cursor': 'pointer',
+	'border': 'none'
+  },
+
+  minusButton: {
+	'position': 'absolute',
+	'left': 0,
+	'top': '26px',
+	'height': '24px',
+	'width': '24px',
+	'margin': '0',
+    'cursor': 'pointer',
+	'border': 'none'
+  },
+
+  
   
   boardF(width: number, height: number, background: string): Object {
     return {
