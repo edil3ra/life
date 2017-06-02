@@ -1,4 +1,5 @@
 * Game of life build with react and typescript
+  https://edil3ra.github.io/games/life/
   It was my first project using react and typescript, so i did a lot of mistake
   I end up droping the project cause the models was badly written,
   I should separete the props and state from their components, huge mistake, it make the buisness model mix the the view model
